@@ -19,6 +19,6 @@ VALUES ('Michael Jackson', 'Thriller', 1982, 50.2, 'pop'),
        ('The Beatles', 'Abbey Road', 1969, 16.9, 'rock'),
        ('Michael Jackson', 'Dangerous', 1991, 17, 'new jack swing'),
        ('ABBA', 'Gold: Greatest Hits', 1992, 21.6, 'pop'),
-       ('Norah Jones', 'Come Away With Me', 19.9, 2002, 'jazz'),
+       ('Norah Jones', 'Come Away With Me', 2002, 19.9, 'jazz'),
        ('Nirvana', 'Nevermind', 1991, 17.8, 'grunge')
 
