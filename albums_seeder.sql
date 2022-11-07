@@ -1,5 +1,7 @@
 USE codeup_test_db;
 
+TRUNCATE albums;
+
 INSERT INTO albums(artist_name, album_name, release_date, sales, genre)
 VALUES ('Michael Jackson', 'Thriller', 1982, 50.2, 'pop'),
        ('AC/DC', 'Back in Black', 1980, 30.1, 'hard rock'),
@@ -20,5 +22,7 @@ VALUES ('Michael Jackson', 'Thriller', 1982, 50.2, 'pop'),
        ('Michael Jackson', 'Dangerous', 1991, 17, 'new jack swing'),
        ('ABBA', 'Gold: Greatest Hits', 1992, 21.6, 'pop'),
        ('Norah Jones', 'Come Away With Me', 2002, 19.9, 'jazz'),
-       ('Nirvana', 'Nevermind', 1991, 17.8, 'grunge')
+       ('Nirvana', 'Nevermind', 1991, 17.8, 'grunge');
+
+SELECT * FROM albums;
 
