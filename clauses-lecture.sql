@@ -13,7 +13,7 @@ SELECT emp_no, first_name, last_name FROM employees
             WHERE last_name IN ('Herber', 'Dredge', 'Lipner', 'Baek');
 
 SELECT emp_no, first_name, last_name FROM employees
-            WHERE emp_no < 10026 && emp_no > 10016;
+            WHERE emp_no < 10026 AND emp_no > 10016;
 
 SELECT emp_no, first_name, last_name FROM employees
             WHERE emp_no < 20000 AND last_name IN ('Herber', 'Baek')
@@ -30,3 +30,19 @@ SELECT first_name, last_name, birth_date, hire_date FROM employees
             AND hire_date NOT LIKE '199%';
 
 SELECT * FROM employees WHERE birth_date LIKE '1954-01%';
+
+
+# LIMIT and OFFSET
+
+SELECT * FROM employees WHERE birth_date LIKE '1954-01%' ORDER BY birth_date, last_name
+                                                         LIMIT 50;
+
+SELECT * FROM employees WHERE birth_date LIKE '1954-01%' ORDER BY birth_date, last_name
+LIMIT 50 OFFSET 50;
+
+# underscore wildcard specifies the required position in which the desired must be
+SELECT * FROM employees WHERE last_name LIKE '_e%'; # Fernando or Deshawn for example.
+
+
+SELECT * FROM employees WHERE last_name LIKE '__e%'; # Klein or Stern for example
+
