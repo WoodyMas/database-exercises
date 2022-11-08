@@ -7,7 +7,7 @@ SELECT release_date FROM albums WHERE album_name = 'Sgt. Pepper\'s Lonely Hearts
 # The genre for Nevermind
 SELECT genre FROM albums WHERE album_name = 'Nevermind';
 # Which albums were released in the 1990s
-SELECT * FROM albums WHERE release_date > 1990 && albums.release_date < 1999;
+SELECT * FROM albums WHERE release_date > 1989 && albums.release_date < 2000 ORDER BY release_date;
 # Which albums had less than 20 million certified sales
 SELECT * FROM albums WHERE sales < 20;
 # All the albums with a genre of "Rock". Why do these query results not include albums with a genre of "Hard rock" or "Progressive rock"?
