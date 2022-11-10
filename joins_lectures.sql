@@ -33,3 +33,6 @@ INSERT INTO preferences (person_id, album_id) VALUES (1, 12), (1, 5), (1, 22), (
 # Selecting
 SELECT p.first_name, a.album_name AS name FROM persons p
     JOIN preferences pf ON p.person_id = pf.person_id JOIN albums a ON pf.album_id = a.id;
+
+CREATE DATABASE join_test_db;
+
