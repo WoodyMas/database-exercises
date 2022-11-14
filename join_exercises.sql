@@ -160,10 +160,6 @@ FROM salaries s JOIN employees.employees e ON s.emp_no = e.emp_no
 WHERE dm.to_date LIKE '9%' AND s.to_date LIKE '9%'
     ORDER BY d.dept_name;
 
-# Bonus Find the names of all current employees, their department name, and their current manager's name .
-
-
-
 SELECT title AS title, COUNT(*) AS Total FROM titles
     JOIN employees AS emp
         ON emp.emp_no = titles.emp_no
@@ -173,6 +169,8 @@ SELECT title AS title, COUNT(*) AS Total FROM titles
         ON useMe.dept_no = deps.dept_no
 
     WHERE deps.dept_no = 'd009' GROUP BY title;
+
+
 
 # EXERCISE PORTION
 # ######################################################
