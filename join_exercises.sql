@@ -90,7 +90,7 @@ SELECT emp_no FROM dept_manager;
 SELECT emp_no FROM employees;
 
 
-
+# EXAMPLE
 SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS full_name, department_emp.dept_no
 FROM employees as employee
          JOIN dept_emp as department_emp
@@ -99,6 +99,7 @@ FROM employees as employee
               ON department.dept_no = department_emp.dept_no
 WHERE department_emp.to_date = '9999-01-01' AND employee.emp_no = 10001;
 
+# A working version with no aliases
 SELECT dept_name AS 'DEPARTMENT', CONCAT(first_name,', ', last_name) AS 'DEPARTMENT MANAGER'
     FROM employees
     JOIN dept_manager
@@ -107,54 +108,71 @@ SELECT dept_name AS 'DEPARTMENT', CONCAT(first_name,', ', last_name) AS 'DEPARTM
         ON departments.dept_no = dept_manager.dept_no
     WHERE  dept_manager.to_date LIKE '%9999%' ORDER BY DEPARTMENT;
 
+# WORKS with aliases
+SELECT dept_name AS 'DEPARTMENT', CONCAT(first_name,', ', last_name) AS 'DEPARTMENT MANAGER'
+         FROM employees AS e
+         JOIN dept_manager AS dm
+              ON dm.emp_no = e.emp_no
+         JOIN departments AS d
+              ON d.dept_no = dm.dept_no
+WHERE  (dm.to_date LIKE '%9999%' AND e.gender = 'F') ORDER BY DEPARTMENT;
 
+
+SELECT dept_name AS 'DEPARTMENT', CONCAT(first_name,', ', last_name) AS 'DEPARTMENT MANAGER'
+FROM employees AS e
+         JOIN dept_manager AS dm
+              ON dm.emp_no = e.emp_no
+         JOIN departments AS d
+              ON d.dept_no = dm.dept_no
+WHERE  (dm.to_date LIKE '%9999%' AND e.gender = 'F') ORDER BY DEPARTMENT;
+
+SELECT title FROM titles;
+
+SELECT * FROM titles;
+
+SELECT * FROM titles; # This has emp_no
+SELECT * FROM employees; # This has emp_no
+SELECT * FROM departments; # This has dept_no
+SELECT * FROM dept_emp; # This has emp_no and dept_no
+
+
+
+# Need to link the titles with the
+
+SELECT title, COUNT(*) AS Total FROM titles
+    JOIN employees
+        ON titles.emp_no = employees.emp_no
+    JOIN dept_emp
+        ON employees.emp_no = dept_emp.emp_no
+    WHERE (dept_no = 'd009' AND dept_emp.to_date LIKE '999%' AND titles.to_date LIKE '999%')
+    GROUP BY title ORDER BY Total DESC;
+
+# Find the current salary of all current managers
+# Department Name | Department Manager | Salary
+# titles.title    |
+
+SELECT d.dept_name AS 'Department Name',
+       CONCAT(e.first_name,', ', e.last_name) AS 'Department Manager',
+       s.salary
+FROM salaries s JOIN employees.employees e ON s.emp_no = e.emp_no
+    JOIN dept_manager dm on e.emp_no = dm.emp_no
+    JOIN departments d on dm.dept_no = d.dept_no
+WHERE dm.to_date LIKE '9%' AND s.to_date LIKE '9%'
+    ORDER BY d.dept_name;
+
+# Bonus Find the names of all current employees, their department name, and their current manager's name .
+
+
+
+SELECT title AS title, COUNT(*) AS Total FROM titles
+    JOIN employees AS emp
+        ON emp.emp_no = titles.emp_no
+    JOIN dept_emp AS useMe
+        ON emp.emp_no = useMe.emp_no
+    JOIN departments AS deps
+        ON useMe.dept_no = deps.dept_no
+
+    WHERE deps.dept_no = 'd009' GROUP BY title;
 
 # EXERCISE PORTION
 # ######################################################
-
-
-
-
-SHOW TABLES;
-
-DESCRIBE roles;
-DESCRIBE users;
-
-CREATE TABLE roles (
-                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                       name VARCHAR(100),
-                       can_edit TINYINT NOT NULL,
-                       can_post TINYINT NOT NULL,
-                       PRIMARY KEY (id)
-);
-
-SELECT * FROM roles;
-SELECT * FROM users;
-
-INSERT INTO roles (name, can_edit, can_post) VALUES
-                      ('admin', 1,1),
-                      ('author', 0,1),
-                      ('user', 0, 0);
-
-CREATE TABLE users (
-                      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                      name VARCHAR(255),
-                      email VARCHAR(100) NOT NULL,
-                      role_id INT UNSIGNED DEFAULT NULL,
-                      PRIMARY KEY (id),
-                      FOREIGN KEY (role_id) REFERENCES roles (id)
-);
-
-INSERT INTO users (name, email, role_id) VALUES
-                      ('Mason Wudtee', 'masonwudtee@wudtee.com', 1),
-                      ('Kelly Clarkson', 'kellyclark@son.com', 2),
-                      ('Billy Bob', 'billy@bob.com', 2),
-                      ('Ariana Grande', 'ariana@grande.com', 3),
-                      (null, 'john@cena.com', null);
-
-SELECT users.name as username, roles.name as rolename
-FROM users
-LEFT JOIN roles ON users.role_id = roles.id;
-
-
-
